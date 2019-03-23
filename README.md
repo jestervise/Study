@@ -1,2 +1,2 @@
 # Study
-Study notes on programming
+Study notes on programming(JavaScript)
