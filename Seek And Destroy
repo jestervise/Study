@@ -31,3 +31,29 @@ return xan;
 }
 
 destroyer([1, 2, 3, 1, 2, 3], 2, 3);
+
+//Basic solution
+
+function destroyer(arr) {
+  //save arguments as args
+  var args = Array.prototype.slice.call(arguments);
+  
+  //Loop through arr array for every argument array element
+  for (var i = 0; i < arr.length; i++) {
+    for (var j = 0; j < args.length; j++) {
+      //if same set the argument to null
+      if (arr[i] === args[j]) {
+        delete arr[i];
+      }
+    }
+  }
+  //return the array with no null value
+  return arr.filter(Boolean);
+}
+
+destroyer([1, 2, 3, 1, 2, 3], 2, 3);
+
+//Intermediate solution
+
+
+
