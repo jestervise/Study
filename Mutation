@@ -1,0 +1,29 @@
+function mutation(arr) {
+  var counter=0;
+  var length=0;
+  if(arr[0].length>arr[1].length){
+    length=arr[0].length;
+    
+    
+  }else{
+    length=arr[1].length;
+  }
+  for(var i=0;i<length;i++){
+     if(arr[1].toLowerCase().indexOf(arr[0].toLowerCase().charAt(i))>=0){
+      counter++;
+    }
+    
+  }
+   console.log(counter);
+  if(counter==arr[1].length){
+    return true;
+  }
+  else{
+    return false;
+  }
+  
+ 
+ 
+}
+
+mutation(["floor", "for"]);
