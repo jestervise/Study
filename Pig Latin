@@ -1,0 +1,33 @@
+//My way 
+
+function translatePigLatin(str) {
+  let vowel=/[aeiou]/ig;
+  let consonant =/[^aeiou]+/i
+  str=str.toLowerCase();
+
+ //If the first letter is vowel add way to the end
+  if(vowel.test(str[0])){
+    console.log(str.concat("way"));
+    return str.concat("way");
+  }
+  // If there's no vowel in the string, add "ay" to the end
+  else if(!vowel.test(str)){
+    console.log(str.concat("ay"));
+    return str.concat("ay");
+    
+  }
+  //If the first few letters are consonant, throw the letters to the back and concat "ay"
+  else if(consonant.test(str)){
+    console.log(str.split("").concat(str.match(consonant)).join("").replace(consonant,"").concat("ay"));
+    return  str.split("").concat(str.match(consonant)).join("").replace(consonant,"").concat("ay");
+  }
+  
+  // otherwise throw the first letter to the back and add "ay"
+  else{
+    console.log(str.split("").concat(str[0]).splice(1,str.length).concat("ay").join(""));
+    return  str.split("").concat(str[0]).splice(1,str.length).concat("ay").join("");
+  }
+  
+}
+
+translatePigLatin("glove");
