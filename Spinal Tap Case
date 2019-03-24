@@ -1,0 +1,62 @@
+//My way
+
+function spinalCase(str) {
+  // "It's such a fine line between stupid, and clever."
+  // --David St. Hubbins
+  //Using regex to specify space underscore and capital letter and replace it with hyphen
+  var regex=/\s|_|(\w)(?=[A-Z])/g;
+   return  str.replace(regex,"$1-").toLowerCase();;
+}
+
+spinalCase("The_Andy_Griffith_Show");
+
+//Basic solution
+
+function spinalCase(str) {
+  // Create a variable for the white space and underscores.
+  var regex = /\s+|_+/g;
+
+  // Replace low-upper case to low-space-uppercase
+  str = str.replace(/([a-z])([A-Z])/g, '$1 $2');
+
+  // Replace space and underscore with -
+  return str.replace(regex, '-').toLowerCase();
+}
+
+// test here
+spinalCase('This Is Spinal Tap');
+
+//Intermediate solution
+
+function spinalCase(str) {
+  // Replace low-upper case to low-space-uppercase
+  str = str.replace(/([a-z])([A-Z])/g, '$1 $2');
+  // Split on whitespace and underscores and join with dash
+  return str.toLowerCase().split(/(?:_| )+/) .join('-');
+}
+
+// test here
+spinalCase('This Is Spinal Tap');
+
+//Advanced Solution
+
+function whatIsInAName(collection, source) {
+  // "What's in a name? that which we call a rose
+  // By any other name would smell as sweet.”
+  // -- by William Shakespeare, Romeo and Juliet
+  var srcKeys = Object.keys(source);
+
+  // filter the collection
+  return collection.filter(function (obj) {
+    return srcKeys
+      .map(function(key) {
+        return obj.hasOwnProperty(key) && obj[key] === source[key];
+      })
+      .reduce(function(a, b) {
+        return a && b;
+      });
+  });
+}
+
+// test here
+whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
