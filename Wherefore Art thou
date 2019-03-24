@@ -1,0 +1,70 @@
+//Basic solution
+
+function whatIsInAName(collection, source) {
+  // "What's in a name? that which we call a rose
+  // By any other name would smell as sweet.”
+  // -- by William Shakespeare, Romeo and Juliet
+  
+  //Set srcKeys equal the properties in source object
+  var srcKeys = Object.keys(source);
+
+  // filter the collection
+  return collection.filter(function (obj) {
+    for(var i = 0; i < srcKeys.length; i++) {
+    //if every object in array doesnt have the property(first?last?) in srcKeys
+    //or the object in array with the corresponding property value != to the properties value in the source object 
+    //Return false
+      if(!obj.hasOwnProperty(srcKeys[i]) || obj[srcKeys[i]] !== source[srcKeys[i]]) {
+        return false;
+      }
+    }
+    
+    //else if no false, then return true
+    return true;
+  });
+}
+
+// test here
+whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
+
+//Intermediate solution
+//Same as basic but only using every on each array element within filter function to return true for every object with the key property 
+
+function whatIsInAName(collection, source) {
+  // "What's in a name? that which we call a rose
+  // By any other name would smell as sweet.”
+  // -- by William Shakespeare, Romeo and Juliet
+  var srcKeys = Object.keys(source);
+
+  return collection.filter(function (obj) {
+    return srcKeys.every(function (key) {
+      return obj.hasOwnProperty(key) && obj[key] === source[key];
+    });
+  });
+}
+
+// test here
+whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
+
+//Advanced solution
+
+function whatIsInAName(collection, source) {
+  // "What's in a name? that which we call a rose
+  // By any other name would smell as sweet.”
+  // -- by William Shakespeare, Romeo and Juliet
+  var srcKeys = Object.keys(source);
+
+  // filter the collection
+  return collection.filter(function (obj) {
+    return srcKeys
+      .map(function(key) {
+        return obj.hasOwnProperty(key) && obj[key] === source[key];
+      })
+      .reduce(function(a, b) {
+        return a && b;
+      });
+  });
+}
+
+// test here
+whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
