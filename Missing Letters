@@ -1,0 +1,34 @@
+//My way, using ASCII conversion
+
+function fearNotLetter(str) {
+  str=str.split("").sort();
+  var newArray=[];
+  console.log(newArray.length);
+  var num;
+    for(var i=0;i<str.length;i++){
+      //convert the character to number
+      num=str[i].charCodeAt(0);
+      //If not reaching the length of array and the first element plus 1 is not equal to next element
+      //push the element into newArray after convert it back to character
+      if(i+1!=str.length && str[i].charCodeAt(0)+1!=str[i+1].charCodeAt(0)){
+        for(var j=str[i].charCodeAt(0)+1;j<str[i+1].charCodeAt(0);j++){
+          newArray.push(String.fromCharCode(j));
+        }
+      }
+      console.log(num);
+    }
+
+    if(newArray.length==0){
+      return undefined;
+    }else{
+       return newArray.join("");
+       }
+   
+    
+  
+}
+
+fearNotLetter("bcdf");
+
+//Solution https://guide.freecodecamp.org/certifications/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/missing-letters/
+
