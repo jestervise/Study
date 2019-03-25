@@ -1,0 +1,26 @@
+//My way
+
+function sumFibs(num) {
+ var first=1;
+ var second=1;
+ var x=[];
+ x.push(first);
+ x.push(second);
+ 
+ for(var i=2;i<num;i++){
+   x[i]=x[i-1]+x[i-2];
+   if(x[i]>num){
+     delete x[i];
+     break;
+   }
+ }
+ console.log(x);
+  var odd=x.filter(x=>x%2!=0);
+  var sum= odd.reduce((x,y)=>x+y);
+  console.log(sum);
+  return sum;
+}
+
+var x=sumFibs(10);
+console.log(x);
+
