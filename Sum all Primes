@@ -1,0 +1,32 @@
+//My way with few references https://www.w3resource.com/javascript-exercises/javascript-function-exercise-8.php
+function sumPrimes(num) {
+  var i=1;
+  var result=0;
+  var checkPrime= function(number){
+     if(number==1){
+       return false;
+     }else if(number==2){
+       return true;
+     }else{
+       for(var i=2;i<number;i++){
+         if(number%i==0){
+           return false;
+         }
+       }
+       return true;
+     }
+  }
+
+  while(i<=num){
+    if(checkPrime(i)){
+      result+=i;
+    }
+    i++;
+  }
+  
+  return result;
+}
+
+sumPrimes(10);
+
+//Solution https://guide.freecodecamp.org/certifications/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/sum-all-primes/
