@@ -1,0 +1,13 @@
+//My way
+
+function dropElements(arr, func) {
+  // Drop them elements.
+  var counter=false;
+  arr=arr.filter(x=>counter==true?true:func(x)==true?counter=true:false);
+
+  return arr;
+}
+
+dropElements([0, 1, 0, 1], function(n) {return n === 1;})
+
+//Solution https://guide.freecodecamp.org/certifications/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/smallest-common-multiple/
