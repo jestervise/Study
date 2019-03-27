@@ -1,0 +1,38 @@
+//My way
+
+function addTogether(...args) {
+    
+  if(args.length==0){
+    return undefined;
+  }else{
+    for(var i=0;i<args.length;i++){
+      if(typeof args[i]!="number"){
+        return undefined;
+      }
+    }
+  
+  if(args.length==1){
+  return function(...newArg){
+    for(var i=0;i<newArg.length;i++){
+      if(typeof newArg[i]!="number"){
+        return undefined;
+      }}
+      
+    return newArg.reduce((i,j)=>i+j) +args[0];
+  };
+  }else{
+  return args.reduce((x,y)=>x+y);
+  }
+  }
+  
+  
+  return false;
+}
+
+var x=addTogether(2)(3);
+
+//Solution https://guide.freecodecamp.org/certifications/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/arguments-optional/
+
+
+
+
