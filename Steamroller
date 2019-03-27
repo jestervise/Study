@@ -25,3 +25,95 @@ function steamrollArray(arr) {
 }
 
 steamrollArray([1, {}, [3, [[4]]]]);
+
+//Updated my solution 
+
+var globalTrack=0;
+function steamrollArray(arr) {
+  // I'm a steamroller, baby
+  var newArray=[];
+
+  var iterableFunc=function(array){
+     
+     if(Array.isArray(array)){
+       for(var i=0;i<array.length;i++){
+        iterableFunc(array[i]);
+       }
+       
+     }else{
+       newArray.push(array);
+     }
+   }
+
+  for(var i =0;i<arr.length;i++){
+    newArray.push(iterableFunc(arr[i]));
+  } 
+  
+  
+ return newArray.filter(x=>x!=undefined);
+}
+
+var xa=steamrollArray([[["a"]], [["b"]]]);
+console.log(xa);
+
+//Basic solution
+
+function steamrollArray(arr) {
+  var flattenedArray = [];
+
+  // Create function that adds an element if it is not an array.
+  // If it is an array, then loops through it and uses recursion on that array.
+  var flatten = function(arg) {
+    if (!Array.isArray(arg)) {
+      flattenedArray.push(arg);
+    } else {
+      for (var a in arg) {
+        flatten(arg[a]);
+      }
+    }
+  };
+
+  // Call the function for each element in the array
+  arr.forEach(flatten);
+  return flattenedArray;
+}
+
+// test here
+steamrollArray([1, [2], [3, [[4]]]]);
+
+//Intermediate solution
+
+function steamrollArray(arr) {
+  let flat = [].concat(...arr);
+  return flat.some(Array.isArray) ? steamrollArray(flat) : flat;
+}
+
+flattenArray([1, [2], [3, [[4]]]]);
+
+//My solution based on intermediate solution
+
+function steamrollArray(arr) {
+  for(var i in arr){ arr=[].concat(...arr)};
+  return arr;
+}
+
+steamrollArray([1, [], [3, [[4]]]]);
+
+//Advanced solution (Most simple)
+
+function steamrollArray(arr) {
+  return arr.toString()
+    .replace(',,', ',')       // "1,2,,3" => "1,2,3"
+    .split(',')               // ['1','2','3']
+    .map(function(v) {
+      if (v == '[object Object]') { // bring back empty objects
+        return {};
+      } else if (isNaN(v)) {        // if not a number (string)
+        return v;
+      } else {
+        return parseInt(v);         // if a number in a string, convert it
+      }
+    });
+}
+
+steamrollArray([1, {pr:"dsd"}, [3, [[4]]]]);
