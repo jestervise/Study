@@ -19,3 +19,7 @@ function palindrome(str) {
 
 
 palindrome("My age is 0, 0 si ega ym.")
+
+//Solution https://guide.freecodecamp.org/certifications/javascript-algorithms-and-data-structures/javascript-algorithms-and-data-structures-projects/palindrome-checker/
+
+
