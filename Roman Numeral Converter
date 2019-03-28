@@ -1,5 +1,3 @@
-//My answer
-
 function convertToRoman(num) {
   var romanTable={
     1:'I',
@@ -11,14 +9,14 @@ function convertToRoman(num) {
     1000:'M'
   }
 
-  function conversion(num,lessNum,moreNum){
+  function conversion(num,lessNum,moreNum,highNum){
     let theString="";
-      if(moreNum==undefined){
-        return undefined;
-      }
+
       let i=0;
-      if(num==4 || num==9){
+      if(num==4){
           theString += romanTable[lessNum]+ romanTable[moreNum];
+      }else if(num==9){
+          theString += romanTable[lessNum]+romanTable[highNum]; 
       }
       else if(num<10){
         if(num>=5){
@@ -37,25 +35,25 @@ function convertToRoman(num) {
 
   if(typeof num =='number'){
     if(num>=1000){
-      var digitThousand.Math.floor(num/1000);
-      var digitHundred =Math.floor(num/100);
-      var digitTen=Math.floor(num/10);
-      var digitOne= num%100;
-      num=conversion(digitHundred,100,500)+conversion(digitHundred,100,500)+conversion(digitTen,10,50) + conversion(digitOne,1,5);
+      var digitThousand=Math.floor(num/1000);
+      var digitHundred =Math.floor(num%1000/100);
+      var digitTen=Math.floor(num%100/10);
+      var digitOne= num%10;
+      num=conversion(digitThousand,1000)+conversion(digitHundred,100,500,1000)+conversion(digitTen,10,50,100) + conversion(digitOne,1,5,10);
     }
     else if(num>=100){
       var digitHundred =Math.floor(num/100);
-      var digitTen=Math.floor(num/10);
-      var digitOne= num%100;
-      num=conversion(digitHundred,100,500)+conversion(digitTen,10,50) + conversion(digitOne,1,5);
+      var digitTen=Math.floor(num/10%10);
+      var digitOne= num%10;
+      num=conversion(digitHundred,100,500,1000)+conversion(digitTen,10,50,100) + conversion(digitOne,1,5,10);
     }
     else if(num>=10){
       var digitTen=Math.floor(num/10);
       var digitOne=num%10;
-      num=conversion(digitTen,10,50) + conversion(digitOne,1,5);
+      num=conversion(digitTen,10,50,100) + conversion(digitOne,1,5,10);
       
     }else{
-      num=conversion(num1,1,5);
+      num=conversion(num,1,5,10);
     }
     
   }else{
@@ -65,4 +63,4 @@ function convertToRoman(num) {
  return num;
 }
 
-convertToRoman(97);
+convertToRoman(1075);
