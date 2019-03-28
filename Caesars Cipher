@@ -1,0 +1,25 @@
+function rot13(str) { // LBH QVQ VG!
+  let regex=/[a-m]/i;
+  let regex2=/\W/g;  
+  let newArray=[];
+  console.log(String.fromCharCode('I'.charCodeAt(0)+13));
+  str=str.split("");
+  for(var i=0;i<str.length;i++){
+      if(regex2.test(str[i])){
+          continue;
+      }
+      else if(regex.test(str[i])){
+         
+        str[i]=String.fromCharCode(str[i].charCodeAt(0)+13);
+      }else{
+        
+        str[i]=String.fromCharCode(str[i].charCodeAt(0)-13);
+      }
+
+  }
+    str =str.join("");
+  return str;
+}
+
+// Change the inputs below to test
+rot13("SERR YBIR?")
