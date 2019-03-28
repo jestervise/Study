@@ -1,0 +1,66 @@
+function convertToRoman(num) {
+  var romanTable={
+    1:'I',
+    5:'V',
+    10:'X',
+    50:'L',
+    100:'C',
+    500:'D',
+    1000:'M'
+  }
+
+  function conversion(num,lessNum,moreNum){
+    let theString="";
+      if(moreNum==undefined){
+        return undefined;
+      }
+      let i=0;
+      if(num==4 || num==9){
+          theString += romanTable[lessNum]+ romanTable[moreNum];
+      }
+      else if(num<10){
+        if(num>=5){
+          theString+=romanTable[moreNum];
+          i=5;
+        }
+      while(i!=num){
+        theString+=romanTable[lessNum];
+        i++;
+      }
+      }
+     
+    
+    return theString;
+  }
+
+  if(typeof num =='number'){
+    if(num>=1000){
+      var digitThousand.Math.floor(num/1000);
+      var digitHundred =Math.floor(num/100);
+      var digitTen=Math.floor(num/10);
+      var digitOne= num%100;
+      num=conversion(digitHundred,100,500)+conversion(digitHundred,100,500)+conversion(digitTen,10,50) + conversion(digitOne,1,5);
+    }
+    else if(num>=100){
+      var digitHundred =Math.floor(num/100);
+      var digitTen=Math.floor(num/10);
+      var digitOne= num%100;
+      num=conversion(digitHundred,100,500)+conversion(digitTen,10,50) + conversion(digitOne,1,5);
+    }
+    else if(num>=10){
+      var digitTen=Math.floor(num/10);
+      var digitOne=num%10;
+      num=conversion(digitTen,10,50) + conversion(digitOne,1,5);
+      
+    }else{
+      num=conversion(num1,1,5);
+    }
+    
+  }else{
+    return false;
+  }
+
+ return num;
+}
+
+convertToRoman(97);
