@@ -1,0 +1,21 @@
+//My way 
+
+function palindrome(str) {
+  // Good luck!
+ 
+  var regex=/\W|_/g;
+  var reversedStr=str.split("").reverse().join("").replace(regex,"").toLowerCase();
+  var str= str.replace(regex,"").toLowerCase();
+  console.log(reversedStr);
+  console.log(str);
+  if(str==reversedStr){
+    return true;
+  }else{
+    return false;
+  };
+  
+}
+
+
+
+palindrome("My age is 0, 0 si ega ym.")
