@@ -1,6 +1,7 @@
-//My way, still working on it
+//My solution, a bit long
 
 function checkCashRegister(price, cash, cid) {
+  //set each currency's value using 2d array
   var currency=[
     ["PENNY",0.01],
     ["NICKEL",0.05],
@@ -12,49 +13,63 @@ function checkCashRegister(price, cash, cid) {
     ['TWENTY',20],
     ['ONE HUNDRED',100]
   ];
+  
+  //Get changes by minus price from cash
   var change =cash-price;
   
+  //set variables
   let changes =[];
   var haveChanges=true;
   let theChanges =0.00;
   let sum=0;
+  let total=0;let match=[];
+  
+  //for each element in cash-in-drawer, add them into total if not zero
+  for(var i in cid){
+    if(cid[i][1]!=0){
+      total+=cid[i][1];
+    }
+  }
+  
+  //total equal to the changes means there's no money in drawer, return closed and the cid
+  if(total==change){
+   
+    return {status:"CLOSED",change:cid};
+  }
+  
+  //set the starting point to the last index and looping to the first so it will always use the largest currency 1st
   for(var i=currency.length-1;i>=0;i--){
+    
     
     if(change>=currency[i][1] && cid[i][1]>0){
 
-       
+       //while the change is larger than the currency value and the cashindrawer of that currency is not 0
     while(change>=currency[i][1] && cid[i][1]>0 &&change!=0 ){
+      //Sum up the changes from the specific currency
       theChanges+= currency[i][1];
-      
+      //minus the currency value from the changes(five decimal point to more accurate)
       change=change.toPrecision(5)-currency[i][1];
+      //minus the currency value from cid too
       cid[i][1]=cid[i][1]-currency[i][1];
      
     }
+    //add the changes to the total
     sum+=theChanges;
+    //and push the currency name, and that currency changes with 2 fixed decimal point 
     changes.push([currency[i][0],parseFloat(theChanges.toFixed(2))]);
-    
+    //reset the changes to zero
     theChanges=0;
   }
     
   }
-  console.log(sum);
+
+  //if the total changes required is less than the change, return insufficient funds
   if(changes.length<=0 ||sum<change){
     return {status: "INSUFFICIENT_FUNDS", change: []};
   }
  
-  // Here is your change, ma'am.
+  // if everything fine,Here is your change, ma'am.
   return {status:"OPEN",change:changes};
 }
 
-// Example cash-in-drawer array:
-// [["PENNY", 1.01],
-// ["NICKEL", 2.05],
-// ["DIME", 3.1],
-// ["QUARTER", 4.25],
-// ["ONE", 90],
-// ["FIVE", 55],
-// ["TEN", 20],
-// ["TWENTY", 60],
-// ["ONE HUNDRED", 100]]
-
-console.log(checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]));
+console.log(checkCashRegister(19.5, 20, [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]));
