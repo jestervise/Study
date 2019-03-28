@@ -1,0 +1,51 @@
+//My solution
+
+function telephoneCheck(str) {
+  // Different regex to match the US phone number https://learn.freecodecamp.org/javascript-algorithms-and-data-structures/javascript-algorithms-and-data-structures-projects/telephone-number-validator
+  
+  let regex=new RegExp(/^\d{3}-\d{3}-\d{4}$|^\(\d{3}\)\d{3}-\d{4}$|^\(\d{3}\)[\s\-]+\d{3}-\d{4}$|^\d{3}[\s\-]+\d{3}[\s\-]+\d{4}$|^\d{10}$/);
+  let regex2=new RegExp(/(^\d{1})([\s-(])+\d{3}([\s-)])+\d{3}[\s-]+\d{4}$/);
+  let regex3=new RegExp(/^\d\s*\(\d{3}\)\s*/);
+  let regex4=new RegExp(/^\d\s+\d{3}\s+|^\d\s+\d{3}-\d{3}-\d{4}/);
+  if(regex.test(str)){
+    return true;
+
+  }else if(regex2.test(str)){
+    var newArray=Array.from(str.match(regex2));
+    console.log(newArray);
+    if(parseInt(newArray[1])==1 ){
+      if(regex3.test(str) || regex4.test(str)){
+        
+        return true;
+      }else{
+       
+        return false;
+      }
+      
+    }else{
+      return false;
+    };
+  }else{
+    return false;
+  }
+  
+  
+}
+
+var x=telephoneCheck("1 (555) 555-5555");
+console.log(x);
+
+//Solution Basic 
+
+function telephoneCheck(str) {
+   var regex = /^(1\s?)?(\(\d{3}\)|\d{3})[\s\-]?\d{3}[\s\-]?\d{4}$/;
+   return regex.test(str);
+}
+telephoneCheck("555-555-5555");
+
+//Solution Intermediate
+function telephoneCheck(str) {
+  var re = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})$/;
+  return re.test(str);
+}
+telephoneCheck("555-555-5555");
